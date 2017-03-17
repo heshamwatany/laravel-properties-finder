@@ -43,10 +43,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        /*if($e)
+        if($e)
         {
             return response()->view('layouts.errors.httperrors', [], 404);
-        }*/
+        }
         
         return parent::render($request, $e);
     }
