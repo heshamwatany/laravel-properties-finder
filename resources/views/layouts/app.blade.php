@@ -48,7 +48,7 @@
                         @if (Auth::guest())
                             <li><a data="data-pjax-pages" href="{{ url('/login') }}" ><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
                             <li><a data="data-pjax-pages" href="{{ url('/register') }}" ><i class="fa fa-user-plus" aria-hidden="true"></i> Register</a></li>
-                            <li class="li-icon"><a id="a-icon-house" ><i class="fa fa-home" aria-hidden="true"></i></a></li>
+                            <li class="li-icon"><a id="a-icon-house" href="/publish_property"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                             <li class="li-icon"><a id="a-icon-heart" href="/my_favorites"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
                         @else
                             <li><a href="/dashboard" data="data-pjax-pages" style="cursor:pointer;">{{ Auth::user()->name }}</a></li>

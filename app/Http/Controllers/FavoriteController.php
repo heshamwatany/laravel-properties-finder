@@ -64,15 +64,3 @@ class FavoriteController extends Controller
         return back();
     }
 }
-
-/**
- * Exception handling, fixing the recover your password.
- * Fix the recover your password thing.
- * Fix the management pannel. Change questions to add new house.
- * model factories and database seeding.
- * fix the schemas (change to ints or floats accordingly).
- * clean the styling in each html page.
- * put the javascript in their according files.
- * minify the css and javascripts.
- * refactor backend code as much as possible & upload to github.
- */

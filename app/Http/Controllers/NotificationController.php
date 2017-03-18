@@ -45,4 +45,37 @@ class NotificationController extends Controller
         return 'Thanks, the property manager has been notified.';
         
     }
+    
+    public function goToNotifications()
+    {
+        $notifications = [];
+        
+        $residences = \Auth::user()->residences;
+        
+        if(count($residences) > 0)
+        {
+            foreach($residences as $residence)
+            {
+                if(count($residence->notifications) > 0)
+                {
+                    foreach($residence->notifications as $notification)
+                    {
+                        $notifications[] = $notification;
+                    }
+                }
+            }
+        }
+        
+        return view('layouts.notifications.notifications', compact('notifications'));
+    }
 }
+
+/**
+ * do the notifications view.
+ * model factories and database seeding.
+ * fix the schemas (change to ints or floats accordingly).
+ * clean the styling in each html page.
+ * put the javascript in their according files.
+ * minify the css and javascripts.
+ * refactor backend code as much as possible & upload to github.
+ */

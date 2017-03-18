@@ -10,9 +10,11 @@
                 <div class="panel-body" style="padding-top: 5px">
 
                     @if (session('status'))
-                        <div class="alert alert-success">
+                    <center>
+                        <div class="alert alert-success" style="width: 80%;">
                             {{ session('status') }}
                         </div>
+                    </center>
                     @endif
 
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">

@@ -65,6 +65,8 @@ Route::patch('/edit_residence/{residence}', 'ResidenceController@editResidence')
 
 Route::post('/notification/{residence}', 'NotificationController@postNotification');
 
+Route::get('/notifications', 'NotificationController@goToNotifications')->middleware('auth');
+
 //Favorites Routes
 
 Route::get('/favorites/{residence}', 'FavoriteController@addResidenceToFavorites')->middleware('auth');
@@ -72,3 +74,6 @@ Route::get('/favorites/{residence}', 'FavoriteController@addResidenceToFavorites
 Route::get('/my_favorites', 'FavoriteController@goToFavorites')->middleware('auth');
 
 Route::get('/my_favorites/remove/{residence}', 'FavoriteController@removeFromFavorites')->middleware('auth');
+
+//Error routes
+
