@@ -67,6 +67,8 @@ Route::post('/notification/{residence}', 'NotificationController@postNotificatio
 
 Route::get('/notifications', 'NotificationController@goToNotifications')->middleware('auth');
 
+Route::post('/answer/{notification}', 'NotificationController@answer')->middleware('auth');
+
 //Favorites Routes
 
 Route::get('/favorites/{residence}', 'FavoriteController@addResidenceToFavorites')->middleware('auth');
@@ -75,5 +77,4 @@ Route::get('/my_favorites', 'FavoriteController@goToFavorites')->middleware('aut
 
 Route::get('/my_favorites/remove/{residence}', 'FavoriteController@removeFromFavorites')->middleware('auth');
 
-//Error routes
 

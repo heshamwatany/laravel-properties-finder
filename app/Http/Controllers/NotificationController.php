@@ -10,6 +10,12 @@ use App\Notification;
 
 use App\User;
 
+use Illuminate\Support\Collection;
+
+use Illuminate\Pagination\LengthAwarePaginator;
+
+use Illuminate\Pagination\Paginator;
+
 class NotificationController extends Controller
 {
     public function postNotification(Request $request, Residence $residence)
@@ -46,9 +52,9 @@ class NotificationController extends Controller
         
     }
     
-    public function goToNotifications()
+    public function goToNotifications(Request $request)
     {
-        $notifications = [];
+        $notificationsArray = [];
         
         $residences = \Auth::user()->residences;
         
@@ -60,19 +66,56 @@ class NotificationController extends Controller
                 {
                     foreach($residence->notifications as $notification)
                     {
-                        $notifications[] = $notification;
+                        $notificationsArray[] = $notification;
                     }
                 }
             }
         }
         
-        return view('layouts.notifications.notifications', compact('notifications'));
+        $results = $this->paginateResults($notificationsArray, $request);
+        
+        return view('layouts.notifications.notifications', $results);
+    }
+    
+    protected function paginateResults($notificationsArray, Request $request)
+    {
+        $perPage = 10;
+        
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        
+        $collection = new Collection($notificationsArray);
+        
+        $currentPageSearchResults = $collection->slice(($currentPage - 1) * $perPage, $perPage)->all();
+        
+        $results = new LengthAwarePaginator(
+                $currentPageSearchResults, 
+                count($collection), 
+                $perPage, 
+                $currentPage, 
+                ['path' => $request->url()]
+        );
+        
+        $notifications = $results->items();
+        
+        return compact('notifications', 'results');
+    }
+    
+    public function answer(Request $request, Notification $notification)
+    {
+        $this->validate($request,[
+            'comment' => 'required|min:10|max:190'
+        ]);
+        
+        $notification->reply($request->comment, \Auth::user());
+        
+        return 'Your message to ' . $notification->name . ' has been sent.';
     }
 }
 
 /**
- * do the notifications view.
- * model factories and database seeding.
+ * answer through youprofy
+ * add the replied property to the notification model
+ * do the model factories and database seeding
  * fix the schemas (change to ints or floats accordingly).
  * clean the styling in each html page.
  * put the javascript in their according files.
