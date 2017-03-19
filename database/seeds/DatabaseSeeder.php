@@ -8,6 +8,8 @@ use App\Residence;
 
 use App\Photo;
 
+use App\Description;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -17,13 +19,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
-        
         User::truncate();
         
         Residence::truncate();
         
         Photo::truncate();
+        
+        Description::truncate();
         
         factory(User::class, 1000)->create()->each(
         
@@ -36,6 +38,10 @@ class DatabaseSeeder extends Seeder
                 $p = factory(Photo::class)->make();
                 
                 $r->addPhoto($p);
+                
+                $d = factory(Description::class)->make();
+                
+                $r->addDescription($d);
             }
         
         );

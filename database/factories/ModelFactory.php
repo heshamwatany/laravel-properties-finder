@@ -113,3 +113,11 @@ $factory->define(App\Photo::class, function(Faker\Generator $faker){
     ];
     
 });
+
+$factory->define(App\Description::class, function(Faker\Generator $faker){
+        
+     return [
+        'title' => $faker->sentence(6),
+        'description' => $faker->text(180)
+     ];
+});

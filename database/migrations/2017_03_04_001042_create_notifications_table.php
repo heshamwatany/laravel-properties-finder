@@ -21,6 +21,7 @@ class CreateNotificationsTable extends Migration
             $table->string('email');
             $table->string('telephone')->default('');
             $table->string('comment');
+            $table->boolean('replied')->default(false);
             $table->timestamps();
         });
     }

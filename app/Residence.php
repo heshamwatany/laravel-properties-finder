@@ -25,7 +25,7 @@ class Residence extends Model
         'parking_spots', 'number_of_bathrooms', 'is_used',
         'number_of_rooms', 'is_direct', 'construction_area',
         'priority', 'pet_friendly', 'laundry', 'utilities_included',
-        'furniture_included', 'wifi_included'
+        'furniture_included', 'wifi_included', 'inactive'
     ];
     
     public $algoliaSettings = [

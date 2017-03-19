@@ -207,16 +207,11 @@
             
             $('.smarty-ui').css('display', 'none');
             
-        });
-            
-        $(document).ready(function()
-        {
             $('.pagination').find('a').each(function() {
                 $(this).attr('data', 'data-pjax-pages');
             });
             
         });
-        
     });
     
 </script>
@@ -524,7 +519,6 @@ Dropzone.options.pic7Form = {
 };
 
 </script>
-
 
 <footer class="footer-distributed" style="min-height:18vh;">
 

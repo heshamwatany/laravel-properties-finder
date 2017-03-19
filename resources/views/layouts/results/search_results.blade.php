@@ -183,3 +183,19 @@
     </div>
 </div>
 @endsection
+
+@section('scripts')
+
+<script>
+$(function(){
+  $(document).ready(function()
+  {
+      $('.pagination').find('a').each(function() {
+          $(this).attr('data', 'data-pjax-pages');
+      });
+  });
+});
+</script>
+
+
+@endsection

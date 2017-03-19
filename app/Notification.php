@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Notification extends Model
 {
     protected $fillable = [
+        'replied',
         'name',
         'last_name',
         'email',
@@ -55,6 +56,10 @@ class Notification extends Model
             $message->to($data['notification']->email);
             $message->subject('YouProfy Reply from ' . $data['sender']->name);
         });
+        
+        $this->update([
+            'replied' => true
+        ]);
     }
     
 }

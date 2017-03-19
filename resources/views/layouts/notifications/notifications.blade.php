@@ -41,7 +41,11 @@
                     </div>
                 </div>
                 <div class="col-sm-2" id="btn-container-{{$notification->id}}">
-                    <button id="{{ $notification->id }}" type="button" data-toggle="modal" onclick="setNotification(this)" data-target="#myModal" class="btn btn-primary" style="width:100%;">Reply</button>
+                    @if($notification->replied == false)
+                        <button id="{{ $notification->id }}" type="button" data-toggle="modal"  data-target="#myModal" class="btn btn-primary modal-btn" style="width:100%;">Reply</button>
+                    @else
+                        <button type="button" class="btn btn-success disabled" style="width:100%; margin-bottom:5px;">Replied <i class="fa fa-check"></i></button>
+                    @endif
                 </div>
             </div>
         </div>
@@ -88,20 +92,20 @@
 
 @section('scripts')
 
-<script>
+<script type="text/javascript">
 
 var notification;
 
-function setNotification(object)
-{
-    notification = object.id;
-    var notificationPoster = $('#poster-'+object.id).html();
-    var notificationComment = $('#comment-'+object.id).html();
+$('.modal-btn').click(function(){
+    
+    notification = this.id;
+    var notificationPoster = $('#poster-'+this.id).html();
+    var notificationComment = $('#comment-'+this.id).html();
     
     $('.modal-body').html('<center><form name="modal-form"><div class="form-group" style="width:80%; text-align:left;"><div class="alert alert-danger" id="errors-div" style="display:none"></div><div>' + notificationPoster + '</div><div>' + notificationComment + '</div><hr><label for="comment">Comments / Answers</label><textarea id="comment-modal" class="form-control" type="text" name="comment"></textarea></div></form></center>');
             
     $('#modal-center').html('<button id="sub-but" onclick="submitModalForm()" type="button" class="btn btn-primary">Send <i class="fa fa-envelope-o"></i></button>');
-}
+});
 
 function submitModalForm()
 {
@@ -139,5 +143,6 @@ function submitModalForm()
     });
    
 }
+
 </script>
 @endsection

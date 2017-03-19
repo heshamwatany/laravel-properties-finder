@@ -205,6 +205,33 @@
 @endsection
 
 @section('scripts')
+<script src="/galleria/galleria-1.5.5.min.js"></script>
+<script src='/galleria/themes/classic/galleria.classic.min.js'></script>
+<script src='/galleria/themes/fullscreen/galleria.fullscreen.min.js'></script>
+<link rel="stylesheet" type="text/css" href="/galleria/themes/classic/galleria.classic.css"/>
+<script>
+
+    $(function() {
+        Galleria.run('.galleria', {
+            trueFullscreen: true,
+            fullscreenCrop: true,
+            theme: 'classic',
+            extend: function()
+            {
+                var gallery = this;
+                this.addElement('fscr');
+                this.appendChild('stage','fscr');
+                var fscr = this.$('fscr')
+                    .click(function() {
+                        gallery.toggleFullscreen();
+                    });
+                $('.galleria-fscr').html('<i class="fa fa-expand" style="color:lightgrey"></i>')
+                this.addIdleState(this.get('fscr'), { opacity:0 });
+            }
+        });
+    });
+
+</script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEZbTqFLGAurA88s8oFkdtWSHbrD-ZD-8&callback="
         async defer></script>
@@ -359,33 +386,5 @@ $(function() {
            });
        }
    }
-</script>
-
-<script src="/galleria/galleria-1.5.5.min.js"></script>
-<script src='/galleria/themes/classic/galleria.classic.min.js'></script>
-<script src='/galleria/themes/fullscreen/galleria.fullscreen.min.js'></script>
-<link rel="stylesheet" type="text/css" href="/galleria/themes/classic/galleria.classic.css"/>
-<script>
-
-    $(function() {
-        Galleria.run('.galleria', {
-            trueFullscreen: true,
-            fullscreenCrop: true,
-            theme: 'classic',
-            extend: function()
-            {
-                var gallery = this;
-                this.addElement('fscr');
-                this.appendChild('stage','fscr');
-                var fscr = this.$('fscr')
-                    .click(function() {
-                        gallery.toggleFullscreen();
-                    });
-                $('.galleria-fscr').html('<i class="fa fa-expand" style="color:lightgrey"></i>')
-                this.addIdleState(this.get('fscr'), { opacity:0 });
-            }
-        });
-    });
-
 </script>
 @endsection

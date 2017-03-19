@@ -106,7 +106,10 @@ class NotificationController extends Controller
             'comment' => 'required|min:10|max:190'
         ]);
         
-        $notification->reply($request->comment, \Auth::user());
+        if($notification->replied == false)
+        {
+            $notification->reply($request->comment, \Auth::user());
+        }
         
         return 'Your message to ' . $notification->name . ' has been sent.';
     }

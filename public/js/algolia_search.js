@@ -607,3 +607,53 @@ $('#zip').keyup(function(e){
     }
     
 });
+
+var notification;
+
+$('.modal-btn').click(function(){
+    
+    notification = this.id;
+    var notificationPoster = $('#poster-'+this.id).html();
+    var notificationComment = $('#comment-'+this.id).html();
+    
+    $('.modal-body').html('<center><form name="modal-form"><div class="form-group" style="width:80%; text-align:left;"><div class="alert alert-danger" id="errors-div" style="display:none"></div><div>' + notificationPoster + '</div><div>' + notificationComment + '</div><hr><label for="comment">Comments / Answers</label><textarea id="comment-modal" class="form-control" type="text" name="comment"></textarea></div></form></center>');
+            
+    $('#modal-center').html('<button id="sub-but" onclick="submitModalForm()" type="button" class="btn btn-primary">Send <i class="fa fa-envelope-o"></i></button>');
+});
+
+function submitModalForm()
+{
+    var comment = $('#comment-modal');
+    
+    var url = '/answer/' + notification;
+    
+    var id = '#btn-container-' + notification;
+    
+    $.post(url,{
+        _token:window.Laravel.csrfToken, 
+        comment:comment.val()
+       }, function(data){
+        
+            $('.modal-body').html('<div class="alert alert-success"><center><b>'
+                + data + '</b></center></div>');
+            
+            $('#modal-center').html('<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>');
+            
+            $(id).html('<button type="button" class="btn btn-success disabled" style="width:100%; margin-bottom:5px;">Replied <i class="fa fa-check"></i></button>');
+            
+    }).fail(function(response){
+        var errors = response.responseJSON;
+        var msg = '';
+        
+        console.log(errors);
+        
+        if(typeof(errors.comment) != 'undefined')
+        {
+            msg = msg + errors.comment[0]; comment.css('border-color', 'red');
+        }
+        
+        $('#errors-div').html(msg);
+        $('#errors-div').css('display', 'block')
+    });
+   
+}
