@@ -52,6 +52,11 @@ class NotificationController extends Controller
         
     }
     
+    private function cmp($a, $b)
+    {
+        return strtotime($b->created_at) - strtotime($a->created_at);
+    }
+    
     public function goToNotifications(Request $request)
     {
         $notificationsArray = [];
@@ -72,6 +77,8 @@ class NotificationController extends Controller
             }
         }
         
+        usort($notificationsArray, array($this, 'cmp'));
+        
         $results = $this->paginateResults($notificationsArray, $request);
         
         return view('layouts.notifications.notifications', $results);
@@ -88,11 +95,11 @@ class NotificationController extends Controller
         $currentPageSearchResults = $collection->slice(($currentPage - 1) * $perPage, $perPage)->all();
         
         $results = new LengthAwarePaginator(
-                $currentPageSearchResults, 
-                count($collection), 
-                $perPage, 
-                $currentPage, 
-                ['path' => $request->url()]
+            $currentPageSearchResults, 
+            count($collection), 
+            $perPage, 
+            $currentPage, 
+            ['path' => $request->url()]
         );
         
         $notifications = $results->items();
@@ -113,15 +120,13 @@ class NotificationController extends Controller
         
         return 'Your message to ' . $notification->name . ' has been sent.';
     }
+
 }
 
 /**
- * answer through youprofy
- * add the replied property to the notification model
- * do the model factories and database seeding
- * fix the schemas (change to ints or floats accordingly).
+ * Provide filters and sorters to the notifications replied
  * clean the styling in each html page.
  * put the javascript in their according files.
  * minify the css and javascripts.
- * refactor backend code as much as possible & upload to github.
+ * refactor backend code as much as possible.
  */
