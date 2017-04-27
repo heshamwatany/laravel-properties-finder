@@ -175,7 +175,7 @@
         });
         
         $(document).on('pjax:error', function(event, xhr, textStatus, errorThrown, options){
-            console.log(errorThrown);    
+            console.log(errorThrown);
         });
         
         $(document).on('pjax:timeout', function(event) {
