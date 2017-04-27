@@ -23,6 +23,19 @@ to predict and suggest what the user might be looking for.
 ## Smartystreets & Google Maps
 
 I used the Smartystreets JavaScript API in order to help users identify the address of the property they were wanting to upload or publish,
-in addition, via ajax and leveraging google maps geolocation, I displayed the map associated with the address theyhad just entered.
+in addition, via ajax and leveraging google maps geolocation, I displayed the map associated with the address they had just entered.
 
 ![alt text](https://cloud.githubusercontent.com/assets/23323398/25495801/322de832-2b44-11e7-980d-2fb132e15b8b.png)
+
+## Dropzone.js
+
+I used dropzone.js library in order  to allow users to upload images associated with the  properties they wanted to publish.
+
+![alt text](https://cloud.githubusercontent.com/assets/23323398/25495799/32290f88-2b44-11e7-9455-6e35f1c4c01f.png)
+
+## Galleria
+
+I used Galleria in order to provide a cool slide show functionality in both full-screen and default-screen mode in order to allow the user to see the images associated with
+a selected property.
+
+![alt text](https://cloud.githubusercontent.com/assets/23323398/25495800/322b3e02-2b44-11e7-8363-83a89387e62b.png)
